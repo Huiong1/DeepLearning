@@ -1,5 +1,5 @@
 import tensorflow as tf
-from MNISTData import MNISTData 
+from ImageClassifier.MNISTData import MNISTData 
 from AutoEncoder import AutoEncoder
 import numpy as np
 

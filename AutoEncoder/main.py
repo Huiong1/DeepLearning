@@ -1,4 +1,4 @@
-from MNISTData import MNISTData
+from ImageClassifier.MNISTData import MNISTData
 from AutoEncoder import AutoEncoder
 
 if __name__ == "__main__":
