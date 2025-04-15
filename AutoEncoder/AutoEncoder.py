@@ -36,6 +36,7 @@ class AutoEncoder:
             units=self.input_output_dim, activation = None, use_bias= True   
         )(decoder_h_layer)
         self.decoder = tf.keras.models.Model(inputs=decoder_input, outputs = decoder_output)
+        
         vae_output = self.decoder(code)
         self.en_decoder = tf.keras.models.Model(inputs = encoder_input, outputs = vae_output)
         optimizer_alg = tf.keras.optimizers.Adam(learning_rate=0.001)
