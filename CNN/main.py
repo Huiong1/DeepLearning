@@ -1,6 +1,6 @@
 import tensorflow as tf
 import matplotlib.pyplot as plt
-from ImageClassifier import imageClassifier_MLP ##일단 주석처리 나중에 클래스 만들고 주석해제
+from CNN_model import CNN ##일단 주석처리 나중에 클래스 만들고 주석해제
 
 def run_classifier():
     fashion_mnist = tf.keras.datasets.fashion_mnist
@@ -34,12 +34,12 @@ def run_classifier():
         plt.xlabel(class_names[train_labels[i]])
     plt.show()    
     
-    my_classifier = imageClassifier_MLP(img_shape_x=28, img_shape_y = 28, num_labels=10)
-    my_classifier.build_MLP_model()
+    my_classifier = CNN(img_shape_x=28, img_shape_y = 28, num_labels=10)
+    my_classifier.build_CNN_model()
     
     train_labels_onehot = my_classifier.to_onehotvec_label(train_labels, 10)
     
-    my_classifier.fit(train_images, train_labels_onehot, num_epochs=10)
+    my_classifier.fit(train_images, train_labels_onehot, epochs=10)
     predicted_labels = my_classifier.predict(test_imgs = test_images)
     predicted_labels = tf.math.argmax(input = predicted_labels, axis=1)
     

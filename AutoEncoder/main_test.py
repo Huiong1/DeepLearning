@@ -19,7 +19,7 @@ if __name__ == "__main__":
     print("load model weights from %s" % load_path)
     
     auto_encoder.load_weights(load_path)
-    num_test_items= 56
+    num_test_items= 100
     test_data= data_loader.x_test[0:num_test_items, :]
     test_label= data_loader.y_test[0:num_test_items]
     test_data_x_print= test_data.reshape(num_test_items, data_loader.width, data_loader.height)
@@ -36,12 +36,12 @@ if __name__ == "__main__":
     
     latent_vecs= auto_encoder.encoder.predict(test_data)
     for i, label in enumerate(test_label):
-        avg_codes[label] = latent_vecs[i]
-        avg_add_cnt[label] += 1.0
+        avg_codes[label] += latent_vecs[i]
+        avg_add_cnt[label] += 1.0   
         
     for i in range(10):
-        if avg_add_cnt[label] > 0.1:
-            avg_codes[i] /= avg_add_cnt[label]
+        if avg_add_cnt[i] > 0.1:
+            avg_codes[i] /= avg_add_cnt[i]
             
     avg_code_tensor= tf.convert_to_tensor(avg_codes)
     reconst_data_by_vecs= auto_encoder.decoder.predict(avg_code_tensor)

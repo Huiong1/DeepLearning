@@ -1,4 +1,5 @@
 import tensorflow as tf
+import numpy as np
 
 class CNN:
     def __init__(self, num_labels, img_shape_x, img_shape_y):
@@ -28,9 +29,18 @@ class CNN:
         loss_cross_e = tf.keras.losses.CategoricalCrossentropy(from_logits=False)
         classifier_model.compile(optimizer = opt_alg, loss = loss_cross_e, metrics=['accuracy'])
         self.classifier = classifier_model
+        
     def fit (self, x, y, batch_size, epochs):
         self.classifier_model.fit(x=x, y=y, batch_size = batch_size, epochs=epochs)
         
     def predict (self, x, batch_size):
         prediction = self.classifier_model.predict(x=x, batch_size=batch_size)
         return prediction
+    @staticmethod
+    def to_onehotvec_label(index_labels, dim):
+        num_labels= len(index_labels)
+        onehotvec_labels= np.zeros((num_labels, dim))
+        for i, idx in enumerate(index_labels):
+            onehotvec_labels[i][idx] = 1.0
+        onehotvec_labels_tf= tf.convert_to_tensor(onehotvec_labels)
+        return onehotvec_labels_tf

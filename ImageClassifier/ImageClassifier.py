@@ -7,13 +7,6 @@ class imageClassifier_MLP:
         self.img_shape_y = img_shape_y
         self.num_labels = num_labels
         self.classifier = None
-        
-    def fit(self, train_imgs, train_labels, num_epochs):
-        self.classifier(train_imgs, train_labels, epochs=num_epochs)
-        
-    def predict(self, test_imgs):
-        predictions = self.classifier.predict(test_imgs)
-        return predictions
     
     def build_MLP_model(self):
         input_layer = tf.keras.layers.Input(shape=[self.img_shape_x, self.img_shape_y,])
@@ -33,11 +26,18 @@ class imageClassifier_MLP:
         
         self.classifier= classifier_model
         
-        @staticmethod
-        def to_onehotvec_label(index_labels, dim):
-            num_labels= len(index_labels)
-            onehotvec_labels= np.zeros((num_labels, dim))
-            for i, idx in enumerate(index_labels):
-                onehotvec_labels[i][idx] = 1.0
-            onehotvec_labels_tf= tf.convert_to_tensor(onehotvec_labels)
-            return onehotvec_labels_tf
+    def fit(self, train_imgs, train_labels, num_epochs):
+        self.classifier.fit(train_imgs, train_labels, epochs=num_epochs)
+        
+    def predict(self, test_imgs):
+        predictions = self.classifier.predict(test_imgs)
+        return predictions
+        
+    @staticmethod
+    def to_onehotvec_label(index_labels, dim):
+        num_labels= len(index_labels)
+        onehotvec_labels= np.zeros((num_labels, dim))
+        for i, idx in enumerate(index_labels):
+            onehotvec_labels[i][idx] = 1.0
+        onehotvec_labels_tf= tf.convert_to_tensor(onehotvec_labels)
+        return onehotvec_labels_tf

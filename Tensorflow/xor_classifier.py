@@ -3,6 +3,7 @@ from MLP import MLP
 
 def xor_classifier_example ():
     input_data = tf.constant([[0.0, 0.0], [0.0, 1.0],[1.0,0.0], [1.0,1.0]])
+    print(input_data.shape)
     input_data = tf.cast(input_data, tf.float32)
     
     xor_labels = tf.constant([0.0,1.0,1.0,0.0])

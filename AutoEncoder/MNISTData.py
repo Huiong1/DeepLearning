@@ -21,7 +21,7 @@ class MNISTData:
 
         # test code - begin
         # MNISTData.print_image(self.x_train[0])
-        train_size = len(self.x_train)
+        train_size = len(self.x_train)  
         test_size = len(self.x_test)
         print("data size before split: train: %d, test: %d" % (train_size, test_size))
 
@@ -86,8 +86,8 @@ class MNISTData:
 
     @staticmethod
     def print_56_pair_images(img_data_list1, img_data_list2, label_list):
-        num_row = 7
-        num_col = 16
+        num_row = 10
+        num_col = 20
         num_pairs = num_row * num_col
         plt.figure(figsize=(10, 8))
         plt.title("Digit pairs")
