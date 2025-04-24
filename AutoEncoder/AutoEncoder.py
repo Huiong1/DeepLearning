@@ -8,8 +8,8 @@ class AutoEncoder:
         self.relu = tf.keras.activations.relu
         self.tanh = tf.keras.activations.tanh
         self.input_output_dim = 784
-        self.encoder_hidden_layers = [200, 200]
-        self.decoder_hidden_layers = [200, 200]
+        self.encoder_hidden_layers = [392, 186, 93, 32]
+        self.decoder_hidden_layers = [32, 93, 186, 392]
         self.code_dim = 32
         
     def build_model(self):
